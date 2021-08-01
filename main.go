@@ -42,6 +42,7 @@ func handleRequest(conn net.Conn) {
 
 	header, err := readUntilHttpHeaders(conn)
 	if err != nil {
+		log.Println("error happen: ", err)
 		return
 	}
 
@@ -82,10 +83,10 @@ func handleRequest(conn net.Conn) {
 
 func readUntilHttpHeaders(conn net.Conn) (string, error){
 	var buffer strings.Builder
-	tmp := make([]byte, 64)     // using small tmo buffer for demonstrating
+	tmp := make([]byte, 32)     // using small tmo buffer for demonstrating
 	for {
 		_, err := conn.Read(tmp)
-		if err != nil {
+		if err != nil && err != io.EOF {
 			return "", err
 		}
 		tmpStr := string(tmp)

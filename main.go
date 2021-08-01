@@ -62,7 +62,7 @@ func handleRequest(conn net.Conn) {
 		return
 	}
 
-	apiConn, err := net.Dial("tcp", "api-hello.api.svc.cluster.local:8080")
+	apiConn, err := net.Dial("tcp", "gateway.api.svc.cluster.local:8080")
 	if err != nil {
 		conn.Write([]byte("HTTP/1.1 404\n\nNot found"))
 		return

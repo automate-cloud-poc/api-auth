@@ -13,11 +13,13 @@ import (
 
 func main() {
 	// Listen for incoming connections.
+	log.Println("start gateway service")
 	l, err := net.Listen("tcp", "localhost:8080")
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())
 		os.Exit(1)
 	}
+	log.Println("start listening!")
 	// Close the listener when the application closes.
 	defer l.Close()
 	for {
@@ -27,6 +29,7 @@ func main() {
 			fmt.Println("Error accepting: ", err.Error())
 			os.Exit(1)
 		}
+		log.Println("accept request")
 		// Handle connections in a new goroutine.
 		go handleRequest(conn)
 	}

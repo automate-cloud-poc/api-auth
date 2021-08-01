@@ -29,7 +29,6 @@ func main() {
 			fmt.Println("Error accepting: ", err.Error())
 			os.Exit(1)
 		}
-		log.Println("accept request")
 		// Handle connections in a new goroutine.
 		go handleRequest(conn)
 	}

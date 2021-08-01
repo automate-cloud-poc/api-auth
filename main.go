@@ -42,18 +42,18 @@ func handleRequest(conn net.Conn) {
 	}
 
 	if isHealthy(header) {
-		conn.Write([]byte("HTTP/1.1 200 ok\r\n"))
+		conn.Write([]byte("HTTP/1.1 200\n\nok!"))
 		return
 	}
 
 	if !containsAuthV1(header) {
-		conn.Write([]byte("HTTP/1.1 403 Not authorized\r\n"))
+		conn.Write([]byte("HTTP/1.1 403\n\nNot authorized"))
 		return
 	}
 
 	apiConn, err := net.Dial("tcp", "localhost:1323")
 	if err != nil {
-		conn.Write([]byte("HTTP/1.1 404 Not found\r\n"))
+		conn.Write([]byte("HTTP/1.1 404\n\nNot found"))
 		return
 	}
 

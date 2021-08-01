@@ -55,6 +55,8 @@ func handleRequest(conn net.Conn) {
 		return
 	}
 
+	log.Println(header)
+
 	if !containsAuthV1(header) {
 		conn.Write([]byte("HTTP/1.1 403\n\nNot authorized"))
 		return

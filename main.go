@@ -12,6 +12,11 @@ import (
 )
 
 func main() {
+	//go func() {
+	//	time.Sleep(1 * time.Second)
+	//	tmpConn, _ := net.Dial("tcp", "localhost:8080")
+	//	tmpConn.Write([]byte("GET /health HTTP/1.1\n\n"))
+	//}()
 	// Listen for incoming connections.
 	log.Println("start gateway service")
 	l, err := net.Listen("tcp", "localhost:8080")
@@ -84,13 +89,16 @@ func readUntilHttpHeaders(conn net.Conn) (string, error){
 	var buffer strings.Builder
 	tmp := make([]byte, 32)     // using small tmo buffer for demonstrating
 	for {
-		_, err := conn.Read(tmp)
+		n, err := conn.Read(tmp)
 		if err != nil && err != io.EOF {
 			return "", err
 		}
 		tmpStr := string(tmp)
 		buffer.WriteString(tmpStr)
 		if strings.Contains(tmpStr, "\r\n\r\n") {
+			break
+		}
+		if n < 32 {
 			break
 		}
 	}

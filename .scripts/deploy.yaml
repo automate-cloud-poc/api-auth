@@ -1,0 +1,19 @@
+# Default values for api-hello.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+name: api-auth
+
+deploy:
+  replicaCount: 1
+  image:
+    repository: gcr.io/multi-region-master/api-auth
+    tag: latest
+
+service:
+  port: 8080
+
+gateway:
+  routes:
+  - name: "main auth"
+    path: "/v1/auth"

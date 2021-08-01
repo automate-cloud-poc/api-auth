@@ -41,6 +41,11 @@ func handleRequest(conn net.Conn) {
 		return
 	}
 
+	if isHealthy(header) {
+		conn.Write([]byte("HTTP/1.1 200 ok\r\n"))
+		return
+	}
+
 	if !containsAuthV1(header) {
 		conn.Write([]byte("HTTP/1.1 403 Not authorized\r\n"))
 		return
@@ -84,6 +89,13 @@ func readUntilHttpHeaders(conn net.Conn) (string, error){
 		}
 	}
 	return buffer.String(), nil
+}
+
+func isHealthy(header string) bool {
+	if strings.Contains(header, "/health") {
+		return true
+	}
+	return false
 }
 
 func containsAuthV1(header string) bool {

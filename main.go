@@ -15,7 +15,7 @@ func main() {
 	//go func() {
 	//	time.Sleep(1 * time.Second)
 	//	tmpConn, _ := net.Dial("tcp", "localhost:8080")
-	//	tmpConn.Write([]byte("GET /health HTTP/1.1\n\n"))
+	//	tmpConn.Write([]byte("GET /testing HTTP/1.1\n\nx-auth: authorization\n\n"))
 	//}()
 	// Listen for incoming connections.
 	log.Println("start gateway service")
@@ -62,8 +62,9 @@ func handleRequest(conn net.Conn) {
 		return
 	}
 
-	apiConn, err := net.Dial("tcp", "gateway.api.svc.cluster.local")
+	apiConn, err := net.Dial("tcp", "gateway.api.svc.cluster.local:8080")
 	if err != nil {
+		log.Println(err)
 		conn.Write([]byte("HTTP/1.1 404\n\nNot found"))
 		return
 	}

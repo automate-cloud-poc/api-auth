@@ -50,8 +50,6 @@ func handleRequest(conn net.Conn) {
 		return
 	}
 
-	log.Println(header)
-
 	if isHealthy(header) {
 		conn.Write([]byte("HTTP/1.1 200\n\nok!"))
 		return

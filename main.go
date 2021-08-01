@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"golang.org/x/sync/errgroup"
 	"io"
+	"log"
 	"net"
 	"os"
 	"strings"
@@ -40,6 +41,8 @@ func handleRequest(conn net.Conn) {
 	if err != nil {
 		return
 	}
+
+	log.Println(header)
 
 	if isHealthy(header) {
 		conn.Write([]byte("HTTP/1.1 200\n\nok!"))

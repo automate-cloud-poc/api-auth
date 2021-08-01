@@ -113,7 +113,7 @@ func isHealthy(header string) bool {
 }
 
 func containsAuthV1(header string) bool {
-	if strings.Contains(header, "X-Auth: authorization") {
+	if strings.Contains(header, "x-auth: authorization") {
 		return true
 	}
 	return false

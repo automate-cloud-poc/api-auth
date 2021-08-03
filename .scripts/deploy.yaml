@@ -12,8 +12,3 @@ deploy:
 
 service:
   port: 8080
-
-gateway:
-  routes:
-  - name: "main auth"
-    path: "/v1/auth"

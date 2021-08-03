@@ -62,7 +62,7 @@ func handleRequest(conn net.Conn) {
 		return
 	}
 
-	apiConn, err := net.Dial("tcp", "internal-ingressgateway.istio-system.svc.cluster.local:80")
+	apiConn, err := net.Dial("tcp", "internal-ingress.gateway.svc.cluster.local:80")
 	if err != nil {
 		log.Println(err)
 		conn.Write([]byte("HTTP/1.1 404\n\nNot found"))

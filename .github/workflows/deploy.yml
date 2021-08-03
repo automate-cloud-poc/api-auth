@@ -15,7 +15,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ${{ github.event.inputs.cluster }}
   IMAGE_TAG: ${{ github.event.inputs.tag }}
-  IMAGE: api-auth
+  IMAGE: authv1
   REGISTRY: gcr.io
 
 jobs:
